@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{%  block body %}
+
+{%  with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<p>{{message}}</p>
+{%endfor%}
+{% endif %}
+{%endwith%}
+    <form action="/contact" method="post">
+        <input type="text" name="fullname" placeholder="fullname">
+        <input type="text" name="phone" placeholder="phone">
+        <input type="text" name="email" placeholder="email">
+        <button type="submit">Save</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <td>FULL NAME</td>
+                <TD>PHONE</TD>
+                <TD>EMAIL</TD>
+                <TD>OPRATION</TD>
+            </tr>
+        </thead>
+        <TBody>
+            {% for contact in contacts %}
+            <tr>
+                <td>
+                    {{contact.1}}
+                </td>
+                <td>
+                    {{contact.2}}
+                </td>
+                <td>
+                    {{contact.3}}
+                </td>
+                <td>
+                    <a href="/edit/{{contact.0}}">Edit</a>
+                    <a href="/delete/{{contact.0}}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </TBody>
+    </table>
+
+{% endblock %}
